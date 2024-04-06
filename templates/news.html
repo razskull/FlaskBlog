@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block content %}
+	{% for news_item in news_items.items %}
+		<article class="media content-section">
+		  <div class="media-body">
+		    <div class="article-metadata">
+		      <a class="mr-2" href="#">{{ news_item.by }}</a>
+		      <small class="text-muted">{{ news_item.time }}</small>
+		      <h2><a class="article-title" href="{{ news_item.url }}" target="_blank">{{ news_item.title }}</a></h2>
+		      <div class="like-dislike-section">
+		      	<form action="{{ url_for('like_news', news_id=news_item.id) }}" method="post">
+		      		<button type="submit">Like</button>
+		  	  	</form>
+		  	  	<form action="{{ url_for('dislike_news', news_id=news_item.id) }}" method="post">
+		  	  		<button type="submit">Dislike</button>
+		  	  	</form>
+		      </div>
+		      <div class="counters">
+		      	<p>Likes: {{ news_item.get_likes_count() }}</p>
+		      	<p>Dislikes: {{ news_item.get_dislikes_count() }}</p>
+		      </div>
+		    </div>
+		  </div>
+		</article>
+	{% endfor %}
+	{% for page_num in news_items.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+      {% if page_num %}
+        {% if news_items.page == page_num %}
+          <a class="btn btn-danger mb-4" href="{{ url_for('news', page=page_num) }}">{{ page_num }}</a>
+        {% else %}
+          <a class="btn btn-outline-danger mb-4" href="{{ url_for('news', page=page_num) }}">{{ page_num }}</a>
+        {% endif %}
+      {% else %}
+        ...
+      {% endif %}
+    {% endfor %}
+{% endblock content %}

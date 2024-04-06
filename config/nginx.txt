@@ -1,0 +1,38 @@
+Nginx Config
+
+server {
+        server_name www.cop4521rjs19c.me;
+
+        location /static {
+                alias /home/rjs19c/Flask_Blog_COP4521/static;
+        }
+
+        location /templates {
+                alias /home/rjs19c/Flask_Blog_COP4521/templates;
+        }
+
+        location / {
+                proxy_pass http://localhost:8000;
+                include /etc/nginx/proxy_params;
+                proxy_redirect off;
+        }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/www.cop4521rjs19c.me-0001/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/www.cop4521rjs19c.me-0001/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+server {
+    if ($host = www.cop4521rjs19c.me) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+        listen 80;
+        server_name www.cop4521rjs19c.me;
+    return 404; # managed by Certbot
+
+
+}

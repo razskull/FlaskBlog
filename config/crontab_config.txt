@@ -1,0 +1,3 @@
+Cron tab commands:
+0 * * * * /usr/bin/python3 /home/rjs19c/Flask_Blog_COP4521/HackerNewsAPIJSON.py
+5 * * * * /home/rjs19c/Flask_Blog_COP4521/run.sh >> /home/rjs19c/Flask_Blog_COP4521/log/cron.log 2>&1 - error checking command

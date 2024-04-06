@@ -1,0 +1,12 @@
+Supervisor Config
+
+[program:flaskblog]
+directory=/home/rjs19c/Flask_Blog_COP4521
+command=/home/rjs19c/Flask_Blog_COP4521/venv/bin/gunicorn -w 3 flaskblog:app
+user=rjs19c
+autostart=true
+autorestart=true
+stopasgroup=true
+killasgroup=true
+stderr_logfile=/var/log/flaskblog/flaskblog.err.log
+stdout_logfile=/var/log/flaskblog/flaskblog.out.log
