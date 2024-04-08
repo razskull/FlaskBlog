@@ -24,3 +24,6 @@ The code included here runs a website which is Richard Simpson's project for COP
 
 ## Configs
 - See configs folder for all config files
+
+## Website
+- Can be found at https://www.cop4521rjs19c.me/
